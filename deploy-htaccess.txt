@@ -1,0 +1,14 @@
+Options -MultiViews
+RewriteEngine On
+
+# Proxy /api/* to Node backend on port 9999
+RewriteCond %{REQUEST_URI} ^/api/ [NC]
+RewriteRule ^api/(.*)$ http://127.0.0.1:9999/api/$1 [P,L]
+
+# Serve existing files/dirs directly
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# SPA fallback — all other routes serve index.html
+RewriteRule ^ index.html [L]

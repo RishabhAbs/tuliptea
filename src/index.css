@@ -1,0 +1,395 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   ABS TULIP TEA — Design System v2
+   Logo Colors: Red #F04438 · Gold #FFBE0B · Black #0D0D0D
+   Theme: Glassmorphism + Claymorphism
+   Mobile-first · Max 430px
+   ============================================= */
+
+:root {
+  /* ── Logo-extracted palette ── */
+  --red:        #F04438;
+  --red-light:  #f87171;
+  --red-deep:   #b91c1c;
+  --red-shadow: #991b1b;
+  --red-glass:  rgba(240, 68, 56, 0.14);
+  --red-border: rgba(240, 68, 56, 0.22);
+  --red-glow:   rgba(240, 68, 56, 0.35);
+
+  --gold:        #FFBE0B;
+  --gold-light:  #fcd34d;
+  --gold-deep:   #d97706;
+  --gold-shadow: #b45309;
+  --gold-glass:  rgba(255, 190, 11, 0.12);
+  --gold-border: rgba(255, 190, 11, 0.22);
+  --gold-glow:   rgba(255, 190, 11, 0.35);
+
+  /* ── Backgrounds ── */
+  --bg-base:     #ffffff;
+  --bg-layer:    #f9f9f9;
+  --bg-elevated: #f3f3f3;
+
+  /* ── Glass ── */
+  --glass-bg:     rgba(255, 255, 255, 0.9);
+  --glass-blur:   blur(24px) saturate(140%);
+  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+
+  /* ── Text (dark warm on light background) ── */
+  --tx-100: #1e0e06;
+  --tx-300: #5c2c18;
+  --tx-500: #a0624a;
+  --tx-700: #c8907a;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--tx-100);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+}
+
+#root {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  position: relative;
+  background: transparent;
+  box-shadow: 0 0 80px rgba(0,0,0,0.5);
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(240,68,56,0.25); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(240,68,56,0.45); }
+
+/* =============================================
+   MOBILE SCREEN WRAPPER
+   ============================================= */
+
+.mob-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* =============================================
+   GLASSMORPHISM
+   ============================================= */
+
+.glass-card {
+  background: #ffffff;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 24px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,1);
+}
+
+.glass-panel {
+  background: #ffffff;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+/* Gold-variant panel */
+.glass-panel-gold {
+  background: #ffffff;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,190,11,0.22);
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+.glass-card-hover { transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s; }
+.glass-card-hover:hover {
+  border-color: rgba(240,68,56,0.25);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+  transform: translateY(-1px);
+}
+
+/* Glass Input */
+.glass-input {
+  width: 100%;
+  background: #f5f5f5;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 14px;
+  padding: 14px 16px 14px 46px;
+  color: var(--tx-100);
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.glass-input::placeholder { color: var(--tx-500); }
+.glass-input:focus {
+  border-color: rgba(240,68,56,0.45);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(240,68,56,0.08);
+}
+
+/* =============================================
+   ENHANCED UI BUTTONS (Modern Flat)
+   ============================================= */
+
+.clay-btn, .clay-btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 28px;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: inherit;
+  letter-spacing: 0.015em;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.clay-btn::after, .clay-btn-gold::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+}
+
+/* ── RED BTN ── */
+.clay-btn {
+  background: var(--red);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 4px 12px rgba(240,68,56,0.25);
+}
+.clay-btn::after {
+  background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+}
+.clay-btn:hover:not(:disabled) {
+  background: var(--red-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(240,68,56,0.35);
+}
+.clay-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(240,68,56,0.2);
+}
+.clay-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+/* ── GOLD BTN ── */
+.clay-btn-gold {
+  background: var(--gold);
+  color: #1a0a00;
+  box-shadow: 0 4px 12px rgba(255,190,11,0.25);
+  border: 1px solid rgba(255,255,255,0.4);
+}
+.clay-btn-gold::after { background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%); }
+.clay-btn-gold:hover:not(:disabled) {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255,190,11,0.35);
+}
+.clay-btn-gold:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(255,190,11,0.2);
+}
+.clay-btn-gold:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.clay-btn-sm {
+  width: auto;
+  padding: 9px 18px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+/* ── Icon containers (Flat gradient with soft shadow) ── */
+.clay-icon-red  { background: linear-gradient(135deg, var(--red-light), var(--red)); box-shadow: 0 4px 12px rgba(240,68,56,0.25); border: 1px solid rgba(255,255,255,0.15); }
+.clay-icon-gold { background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 0 4px 12px rgba(255,190,11,0.25); border: 1px solid rgba(255,255,255,0.3); }
+.clay-icon-dark { background: linear-gradient(135deg, #444, #111); box-shadow: 0 4px 12px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); }
+
+/* Keep old names pointing to new */
+.clay-icon-green { background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 0 4px 12px rgba(255,190,11,0.25); border: 1px solid rgba(255,255,255,0.3); }
+.clay-icon-blue  { background: linear-gradient(135deg, var(--red-light), var(--red)); box-shadow: 0 4px 12px rgba(240,68,56,0.25); border: 1px solid rgba(255,255,255,0.15); }
+.clay-icon-teal  { background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 0 4px 12px rgba(255,190,11,0.25); border: 1px solid rgba(255,255,255,0.3); }
+
+/* =============================================
+   BADGES
+   ============================================= */
+
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em; white-space: nowrap;
+}
+
+/* Red = active, pending, primary */
+.badge-red    { background: rgba(240,68,56,0.14);   color: #f87171;  border: 1px solid rgba(240,68,56,0.25); }
+/* Gold = sales, money, secondary */
+.badge-gold   { background: rgba(255,190,11,0.14);  color: #FFBE0B;  border: 1px solid rgba(255,190,11,0.25); }
+/* Dark/muted = inactive, soon */
+.badge-dark   { background: rgba(255,255,255,0.05); color: #737373;  border: 1px solid rgba(255,255,255,0.1); }
+/* Dispatched = slightly lighter gold */
+.badge-lime   { background: rgba(255,190,11,0.12);  color: #fcd34d;  border: 1px solid rgba(255,190,11,0.2); }
+
+/* Legacy aliases */
+.badge-green  { background: rgba(240,68,56,0.12);   color: #f87171;  border: 1px solid rgba(240,68,56,0.22); }
+.badge-amber  { background: rgba(255,190,11,0.12);  color: #FFBE0B;  border: 1px solid rgba(255,190,11,0.22); }
+.badge-blue   { background: rgba(240,68,56,0.1);    color: #fca5a5;  border: 1px solid rgba(240,68,56,0.18); }
+.badge-cyan   { background: rgba(255,190,11,0.1);   color: #fde68a;  border: 1px solid rgba(255,190,11,0.18); }
+.badge-orange { background: rgba(240,68,56,0.14);   color: #f87171;  border: 1px solid rgba(240,68,56,0.22); }
+.badge-slate  { background: rgba(255,255,255,0.05); color: #737373;  border: 1px solid rgba(255,255,255,0.1); }
+
+/* =============================================
+   LOGIN PAGE — Orbs
+   ============================================= */
+
+.orb {
+  position: fixed; border-radius: 50%;
+  filter: blur(75px); pointer-events: none; z-index: 0;
+}
+/* Red orb — top left */
+.orb-1 { width: 480px; height: 480px; background: radial-gradient(circle, rgba(240,68,56,0.18) 0%, transparent 70%);  top: -150px; left: -140px; animation: floatOrb 11s ease-in-out infinite; }
+/* Gold orb — bottom right */
+.orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,190,11,0.14) 0%, transparent 70%); bottom: -130px; right: -110px; animation: floatOrb 13s ease-in-out -5s infinite; }
+/* Subtle red — mid */
+.orb-3 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(240,68,56,0.09) 0%, transparent 70%);  top: 40%; left: 55%; animation: floatOrb 9s ease-in-out -3s infinite; }
+
+/* =============================================
+   SEARCH
+   ============================================= */
+
+.search-wrap { position: relative; display: flex; align-items: center; }
+.search-icon { position: absolute; left: 13px; color: var(--tx-500); pointer-events: none; }
+.search-input {
+  background: #f5f5f5;
+  border: 1px solid rgba(0,0,0,0.09);
+  border-radius: 12px;
+  padding: 10px 16px 10px 38px;
+  color: var(--tx-100); font-size: 13.5px; font-family: inherit;
+  outline: none; transition: all 0.2s;
+  width: 240px;
+}
+.search-input::placeholder { color: var(--tx-500); }
+.search-input:focus {
+  border-color: rgba(240,68,56,0.45);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(240,68,56,0.08);
+}
+
+/* =============================================
+   FILTER SELECT
+   ============================================= */
+
+.filter-select {
+  background: #f5f5f5;
+  border: 1px solid rgba(0,0,0,0.09);
+  border-radius: 11px; padding: 9px 14px;
+  color: var(--tx-100); font-size: 13px; font-family: inherit;
+  outline: none; cursor: pointer; transition: border-color 0.2s;
+}
+.filter-select:focus { border-color: rgba(240,68,56,0.42); }
+.filter-select option { background: #ffffff; color: var(--tx-100); }
+
+/* =============================================
+   PROGRESS BAR
+   ============================================= */
+
+.prog-wrap { height: 6px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; }
+.prog-bar  { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--red), var(--gold)); }
+
+/* =============================================
+   DIVIDER
+   ============================================= */
+
+.divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(240,68,56,0.15), rgba(255,190,11,0.1), transparent); }
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33%       { transform: translate(14px,-20px) scale(1.04); }
+  66%       { transform: translate(-10px,-10px) scale(0.97); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@keyframes pulseRed {
+  0%, 100% { box-shadow: 0 0 8px rgba(240,68,56,0.6); }
+  50%       { box-shadow: 0 0 20px rgba(240,68,56,1); }
+}
+@keyframes pulseGold {
+  0%, 100% { box-shadow: 0 0 8px rgba(255,190,11,0.6); }
+  50%       { box-shadow: 0 0 20px rgba(255,190,11,1); }
+}
+
+.fade-in-up    { animation: fadeInUp 0.5s cubic-bezier(0.22,1,0.36,1) forwards; }
+.fade-in-up-d1 { animation: fadeInUp 0.5s 0.08s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* =============================================
+   DATA TABLE
+   ============================================= */
+
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--tx-500); padding: 14px 18px; text-align: left;
+  border-bottom: 1px solid rgba(240,68,56,0.1); white-space: nowrap;
+}
+.data-table td {
+  padding: 14px 18px; font-size: 13.5px; color: var(--tx-100);
+  border-bottom: 1px solid rgba(240,68,56,0.06); white-space: nowrap;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tbody tr { transition: background 0.15s; }
+.data-table tbody tr:hover { background: rgba(240,68,56,0.04); }
+
+/* =============================================
+   AVATAR
+   ============================================= */
+
+.avatar {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px; color: white; flex-shrink: 0;
+}
+
+/* =============================================
+   GRADE COLORS (Gold = premium, Red = standard)
+   ============================================= */
+
+.grade-aplus { color: var(--gold);       }
+.grade-a     { color: var(--gold-light); }
+.grade-bplus { color: var(--red-light);  }
+.grade-b     { color: var(--red);        }
+.grade-c     { color: var(--tx-500);     }

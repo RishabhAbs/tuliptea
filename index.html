@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tulip Tea — Admin Portal</title>
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#F04438" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js').then(reg => {
+
+            // Check for updates every 60 seconds (catches server-side deploys)
+            setInterval(() => reg.update(), 60000);
+
+            // When a new SW is found, it will install and skip waiting automatically.
+            // Listen for the SW_UPDATED message and reload the page.
+            navigator.serviceWorker.addEventListener('message', e => {
+              if (e.data && e.data.type === 'SW_UPDATED') {
+                window.location.reload();
+              }
+            });
+
+            // If a new SW was already waiting when the page loaded, trigger it
+            if (reg.waiting) {
+              reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+            }
+
+            reg.addEventListener('updatefound', () => {
+              const newSW = reg.installing;
+              newSW.addEventListener('statechange', () => {
+                if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+                  // New version installed — it will self-activate via skipWaiting
+                  // and then send SW_UPDATED to reload all clients
+                  newSW.postMessage({ type: 'SKIP_WAITING' });
+                }
+              });
+            });
+          });
+        });
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
