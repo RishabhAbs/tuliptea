@@ -5,3 +5,5 @@ deployment.zip
 TulipTea_Project_clean.zip
 CLAUDE.md
 .claude/
+.env
+server/.env
